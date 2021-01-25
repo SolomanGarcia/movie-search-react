@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function SearchMovies() {
+  // state
+  const [query, setQuery] = useState("");
+
   const searchMovies = async (e) => {
     e.preventDefault();
-    console.log("submitting");
 
-    const query = "Jurassic Park";
     const key = process.env.REACT_APP_MOVIE_KEY;
 
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${key}&language=en-US&query=${query}&page=1&include_adult=false`;
@@ -29,6 +30,8 @@ export default function SearchMovies() {
         className="input"
         name="query"
         placeholder="i.e. Fight Club"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
       />
       <button className="button" type="submit">
         Search
