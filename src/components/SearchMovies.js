@@ -22,21 +22,37 @@ export default function SearchMovies() {
   };
 
   return (
-    <form className="form" onSubmit={searchMovies}>
-      <label htmlFor="query" className="label">
-        Movie Name
-      </label>
-      <input
-        type="text"
-        className="input"
-        name="query"
-        placeholder="i.e. Fight Club"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button className="button" type="submit">
-        Search
-      </button>
-    </form>
+    <>
+      <form className="form" onSubmit={searchMovies}>
+        <label htmlFor="query" className="label">
+          Movie Name
+        </label>
+        <input
+          type="text"
+          className="input"
+          name="query"
+          placeholder="i.e. Fight Club"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="button" type="submit">
+          Search
+        </button>
+      </form>
+
+      <div className="card-list">
+        {movies
+          .filter((movie) => movie.poster_path)
+          .map((movie) => (
+            <div className="card" key={movie.id}>
+              <img
+                className="card--image"
+                src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`}
+                alt={movie.title + " poster"}
+              />
+            </div>
+          ))}
+      </div>
+    </>
   );
 }
